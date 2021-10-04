@@ -2,7 +2,7 @@ const {request, response} = require('express');
 const Usuario = require('../models/usuario')
 const bcrypt = require('bcrypt');
 
-const usuariosGet = async (req = request , res = response) =>{
+ const usuariosGet = async (req = request , res = response) =>{
 
     const {limite = 5, desde = 0 } = req.query;
     const query = { estado: true};
@@ -75,8 +75,11 @@ const usuariosDelete = async (req, res = response) =>{
     
     const usuario =  await Usuario.findByIdAndUpdate( id, {estado: false}); //aca estamos buscando el id que pasamos como primer parametro y para ese definimos el estado como false (update)
     
+   // const usuarioAutenticado = req.usuario; //al tener el usuario autenticado se que usuario borro a "usuario". Es decir, el usuario autentica es el que realizao la accion de borrar al usuario del que se cargp el ID para borrarlo.
+
     res.json({
-    usuario
+    usuario,
+    //usuarioAutenticado
     });
 }
 

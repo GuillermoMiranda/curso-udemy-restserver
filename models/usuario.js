@@ -37,7 +37,8 @@ const UsurarioSchema = Schema ({
 //Aca lo que se hace es desestructurar los campos, sacando los campos __v y password para que esos no viajen en el JSON que me devuelve la base de datos. Es metodo se llama toJSON y se lo modifica
 
 UsurarioSchema.methods.toJSON = function() {
-    const { __v, password, ...usuario} = this.toObject();
+    const { __v, password, _id, ...usuario} = this.toObject();
+    usuario.uid = _id
     return usuario; //cuando desestrutura el objeto saco los campos que no quiero mostras y dejo el resto en usuario, que es el que retorno.
 }
 
